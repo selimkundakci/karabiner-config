@@ -79,7 +79,7 @@ function layer_launchApp() {
   let layer = hyperLayer('o', 'Launch App')
   return layer.manipulators({
     a: toApp("Arc"),
-    c: toApp("ChatGPT"),
+    c: toApp("Cursor"),
     i: toApp("IntelliJ IDEA"),
     v: to$(`open -a 'Visual Studio Code.app'`),
     w: to$(`open -a Whatsapp.app`),
@@ -88,6 +88,7 @@ function layer_launchApp() {
     t: toApp("Warp"),
     f: toApp("Finder"),
     m: toApp("Spotify"),
+    n: toApp("ClickUp"),
     p: toApp("Postman"),
     ',': toApp('System Settings'),
   })
