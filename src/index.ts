@@ -1,7 +1,9 @@
 import {
   hyperLayer,
+  ifApp,
   layer,
   map,
+  modifierLayer,
   NumberKeyValue,
   rule,
   to$,
@@ -14,21 +16,23 @@ import {
 import { raycastWin, spotify } from './utils'
 
 writeToProfile('Default', [
-  hpyer(),
+  hyper(),
   raycast(),
   layer_launchApp(),
   widnow_management(),
   spotify_commands(),
   symbol_layer(),
+  intellijMehGitLayer(),
+  intellijMeh(),
 
   // this has to be last thing otherwise the other layers are being ignored.
   quick_commands(),
 ])
 
-function hpyer() {
+function hyper() {
   return rule('HyperKey').manipulators([
-    map('⇪').toHyper().toIfAlone('⎋')
-    
+    map('⇪').toHyper().toIfAlone('⎋'),
+    map('fn').toMeh().toIfAlone('fn')
   ])
 }
 
@@ -116,4 +120,24 @@ function spotify_commands() {
     s: spotify('search'),
     '␣': spotify('togglePlayPause'),
   })
+}
+
+function intellijMehGitLayer() {
+  let layer = modifierLayer('Meh', 'g').manipulators([{
+    n: toKey('b', '⌘⌥⌃⇧'),
+    b: toKey('b', '⌘⌥⌃'),
+  }]).condition(ifApp('^com.jetbrains.[\\w-]+$'))
+  return layer
+}
+
+function intellijMeh() {
+  return rule('intellij meh').manipulators([
+    map('s', 'Meh').to('s', 'Meh'),
+    map('f', 'Meh').to('f12', ['fn', '⌘', '⇧']),
+    map('l', 'Meh').to('l', '⌘⌥'),
+    map('t', 'Meh').to('f12', ['fn', '⌥']),
+    map('␣', 'Meh').to('a', '⌘⇧'),
+    map('a', 'Meh').to('a', '⌘⇧'),
+    map('r', 'Meh').to('r', '⌥⌃'),
+  ]).condition(ifApp('^com.jetbrains.[\\w-]+$'))
 }
